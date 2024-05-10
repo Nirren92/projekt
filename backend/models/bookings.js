@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 const Table = require('./table');
 
 
-//skapar schemat för bokning. 
+//skapar schemat för bokning. med referat till TABLE ID samt USER ID 
 const bookingSchema = new mongoose.Schema({
         tableID:{
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'Table',
             required: true
         },
-        customerID:{
-            type:Number,
+        username:{
+            type:String,
             required:true,
-            min:1
+            ref:'authprojekt'
         },
         bookingDate: {
             type: Date,
@@ -30,24 +30,27 @@ const bookingSchema = new mongoose.Schema({
 );
 
 //tillgängliga bord
-bookingSchema.statics.findAvailableTables = async function (desiredDate) {
+bookingSchema.statics.findAvailableTables = async function ({bookingDate, numberGuests}) {
     try {
         //kollar vilka bord som har bokingar och sorterar bort dessa bord bland alla som finns. 
-        const booked = await this.find({bookingDate:{$eq:desiredDate}}).distinct('tableID');
-        return await Table.find({_id:{$nin:booked}});
+        const booked = await this.find({bookingDate: {$eq: bookingDate}}).distinct('tableID');
+        return await Table.find({tableID: {$nin: booked}, capacity: {$gte: numberGuests}});
     }
-    catch
+    catch(error)
     {
         throw(error);
     }
 }
 
-//kontroll att bord är tillgänligt
-bookingSchema.statics.checkAvailabiltyTables = async function (desiredDate,tableID) {
+//kontroll att bord är tillgänligt under bokning
+bookingSchema.statics.checkAvailabilityTables = async function (desiredDate,tableID) {
     try {
         //kollar om det finns någon bokning på berörd tid. hittas ingen så returneras true 
-        const booked = await this.find({tableID: tableID,bookingDate: desiredDate}).distinct('tableID');
-        return !booked;
+        const booked = await this.find({
+            tableID: tableID,
+            bookingDate: desiredDate
+        }).distinct('tableID');
+        return booked.length === 0;
     }
     catch
     {
@@ -55,13 +58,24 @@ bookingSchema.statics.checkAvailabiltyTables = async function (desiredDate,table
     }
 }
 
-// lägg till Booking(ska jag ha en kontroll att bordet verkliglen är ledigt....hmm ja de ska jag. nån annan kanske hinner boka innan. )
-bookingSchema.statics.addBooking = async function ({tableID,capacity,location}) {
+// lägg till Booking. kontroll att border inte har blivit taget för att undvika dubbelbokning
+bookingSchema.statics.addBooking = async function ({tableID, username,bookingDate,numberGuests}) {
     try
     {
-        const table = new this({tableID,capacity,location});
-        await table.save();
-        return table;
+        const isAvailable = await this.checkAvailabilityTables(bookingDate, tableID);
+        if (!isAvailable) 
+            {
+                throw new Error("Border har blivit upptaget");
+            }
+
+            const booking = new this({
+                tableID,
+                username,
+                bookingDate,
+                numberGuests
+            });
+            await booking.save();
+            return booking;
     }
     catch(error)
     {
@@ -73,7 +87,6 @@ bookingSchema.statics.addBooking = async function ({tableID,capacity,location}) 
 bookingSchema.statics.updateBooking = async function ({tableID,capacity,location}) {
     try
     {
-
         const updatedTable = await this.findOneAndUpdate(
             {tableID:tableID},
             {capacity,location}
@@ -88,14 +101,14 @@ bookingSchema.statics.updateBooking = async function ({tableID,capacity,location
 
 
 // Ta bort Booking
-bookingSchema.statics.removeBooking = async function ({tableID}) {
+bookingSchema.statics.removeBooking = async function ({tableID, username,bookingDate}) {
     try
     {
-        const result = await this.findOneAndDelete({ tableID: tableID });
+        const result = await this.findOneAndDelete({ tableID: tableID, username:username,bookingDate:bookingDate });
         if(result)
             return result
         else
-            throw new Error("Bord finns ej");
+            throw new Error("bokning finns ej");
     }
     catch(error)
     {
@@ -105,5 +118,5 @@ bookingSchema.statics.removeBooking = async function ({tableID}) {
 
 
 
-const Table = mongoose.model("Table",bookingSchema);
-module.exports = Table;
+const Booking = mongoose.model("Booking",bookingSchema);
+module.exports = Booking;
