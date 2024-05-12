@@ -9,9 +9,11 @@ app.use(cors());
 const authRouters = require("./routers/authrouter")
 const tableRouters = require("./routers/tablerouter")
 const bookingRouters = require("./routers/bookingrouter")
+const foodRouters = require("./routers/foodrouter")
 app.use("/api",cors(), authRouters);
 app.use("/api",cors(), tableRouters);
 app.use("/api",cors(), bookingRouters);
+app.use("/api",cors(), foodRouters);
 //const courses_protected = require("./routers/workexperience")
 //app.use("/api", auth_token,cors(), courses_protected);
 

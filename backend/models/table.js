@@ -27,7 +27,6 @@ const tableSchema = new mongoose.Schema({
 tableSchema.statics.add = async function ({tableID,capacity,location}) {
     try
     {
-        console.log("testar")
         const table = new this({tableID,capacity,location});
         await table.save();
         return table;
