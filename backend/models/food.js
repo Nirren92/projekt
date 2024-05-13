@@ -25,7 +25,7 @@ const foodSchema = new mongoose.Schema({
         required:true
     },
     contains:{
-        type:String,
+        type:[String],
         required:true
     },
     price:{

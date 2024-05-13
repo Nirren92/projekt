@@ -1,0 +1,11 @@
+<div class="container">
+<h1>Meny</h1>    
+            <details *ngFor="let food of foodList">
+                <summary class="indicator">{{ food.name }}</summary>
+                <p class="content">{{ food.description }}</p>
+                <ul class="ingredients">
+                    <li *ngFor="let item of food.contains">{{ item }}</li>
+                </ul>
+                <p class="price">- {{ food.price }} Kr</p>
+            </details>
+</div>
