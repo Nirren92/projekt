@@ -38,11 +38,13 @@ router.post("/table", async(req, res) => {
 router.delete("/table", async(req, res) => {
     try
     {
-        const {tableID, capacity,location} = req.body;
-        if(!tableID || !capacity || !location)
+       
+        const {tableID} = req.body;
+        if(!tableID)
         {
             return res.status(400).json({error:"felaktig input"});
         }
+        
         res.status(202).send(await Table.removeTable({tableID}));
     }
     catch(error)
