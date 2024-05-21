@@ -19,10 +19,12 @@ mongoose
 
 
 //hämta lediga bord 
-router.get("/freetables", async(req, res) => {
+router.post("/freetables", async(req, res) => {
     try
     {
+
         const {bookingDate,numberGuests} = req.body;
+        console.log("indata",bookingDate)
         if(!bookingDate || !numberGuests)
         {
             return res.status(400).json({error:"felaktig input"});

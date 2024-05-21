@@ -22,6 +22,7 @@ export class TableService {
     return this.http.delete(this.url,{ headers, body });
   }
 
+  //Kontroll av data här också?
   addTable(tableData: any): Observable<any> {
     return this.http.post(this.url, tableData);
   }

@@ -1,0 +1,28 @@
+<div class="container">
+    <h1>Bord</h1>    
+    <form [formGroup]="bookForm" (ngSubmit)="getFreeTable()">
+        <div>
+          <label for="bookingDate">Datum:</label>
+          <input type="date" id="bookingDate" formControlName="bookingDate">
+        </div>
+        <div>
+            <label for="bookingtime">tid:</label>
+            <input type="time" id="bookingtime" formControlName="bookingtime">
+          </div>
+        <div>
+          <label for="numberGuests">Kapacitet:</label>
+          <input type="number" id="numberGuests" formControlName="numberGuests">
+        </div>
+       
+        
+        <button type="submit">Sök Bord</button>
+      </form>
+      
+                <details *ngFor="let table of tableList">
+                    <summary class="indicator">Bordsnamn: {{ table.tableID }}</summary>
+                    <p class="content">Placering: {{ table.location }}</p>
+                    <p class="content">Antal gäster: {{ table.capacity }}</p>
+                    <button (click)="bookTable(table.tableID)" >Radera Bord</button>
+                </details>
+    </div>
+    
