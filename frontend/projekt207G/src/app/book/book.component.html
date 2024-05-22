@@ -19,10 +19,12 @@
       </form>
       
                 <details *ngFor="let table of tableList">
-                    <summary class="indicator">Bordsnamn: {{ table.tableID }}</summary>
+                    <summary class="indicator">Bordsnamn: {{ table.tableID }}
+                        <br>
+                        <button (click)="bookTable(table.tableID)" >Boka Bord</button>
+                    </summary>
                     <p class="content">Placering: {{ table.location }}</p>
-                    <p class="content">Antal gäster: {{ table.capacity }}</p>
-                    <button (click)="bookTable(table.tableID)" >Radera Bord</button>
+                    <p class="content">Max antal gäster: {{ table.capacity }}</p>
                 </details>
     </div>
     

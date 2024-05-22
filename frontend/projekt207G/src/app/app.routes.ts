@@ -5,10 +5,10 @@ import { BookComponent } from './book/book.component';
 
 export const routes: Routes = [
 
-    {path:"food", component:FoodComponent},
-    {path:"table", component:TableComponent},
-    {path:"book", component:BookComponent},
-    {path:"", redirectTo:'/food', pathMatch:'full'}
+    {path:'food', component:FoodComponent},
+    {path:'table', component:TableComponent},
+    {path:'book', component:BookComponent},
+    {path:'', redirectTo:'/food', pathMatch:'full'}
 
 
 ];
