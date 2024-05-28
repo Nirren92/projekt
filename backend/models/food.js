@@ -53,12 +53,23 @@ foodSchema.statics.getFood = async function () {
 foodSchema.statics.addFood = async function ({foodID,group,name,description,contains,price}) {
     try
     {
-        const food = new this({foodID,group,name,description,contains,price});
+        const food = new this({
+            foodID: Number(foodID),
+            group: group,
+            name: name,
+            description: description,
+            contains: contains,
+            price: Number(price) 
+        });
+
+        console.log("data",food)
+       
         await food.save();
         return food;
     }
     catch(error)
     {
+        console.log("fel",error)
         throw(error);
     }
 };

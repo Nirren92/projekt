@@ -1,10 +1,10 @@
 export interface Food {
 
-    foodID:Number,
-    group:String,
-    name:String,
-    description:String,
-    contains:String,
-    price:Number
+    foodID:number,
+    group:string,
+    name:string,
+    description:string,
+    contains:string,
+    price:number
 
 }

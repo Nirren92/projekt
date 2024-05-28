@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Meny</h1>      
+                <details *ngFor="let food of foodList">
+                    <summary class="indicator">{{ food.name }}
+                    <br>
+                    <button  class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
+                </summary>
+                    <p class="content">{{ food.description }}</p>
+                    <details>
+                    <summary class="indicator">Innehåll</summary>
+                        <ul class="ingredients">
+                            <li *ngFor="let item of food.contains">{{ item }} 
+                            </li>
+                        </ul>
+                    </details>
+                    <p class="price">- {{ food.price }} Kr</p>
+                    
+                </details>
+    </div>
+    

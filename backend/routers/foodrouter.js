@@ -35,8 +35,9 @@ router.post("/food", async(req, res) => {
     try
     {
         const {foodID,group,name,description,contains,price} = req.body;
-        if(!foodID || !group || !name || !description || !contains || !price)
+        if(!foodID || !group || !name || !description ||  !price)
         {
+          
             return res.status(400).json({error:"felaktig input"});
         }
         

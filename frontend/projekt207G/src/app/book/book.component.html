@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Bord</h1>    
+    <h1>Sök tillgänliga bord</h1>    
     <form [formGroup]="bookForm" (ngSubmit)="getFreeTable()">
         <div>
           <label for="bookingDate">Datum:</label>
@@ -21,7 +21,7 @@
                 <details *ngFor="let table of tableList">
                     <summary class="indicator">Bordsnamn: {{ table.tableID }}
                         <br>
-                        <button (click)="bookTable(table.tableID)" >Boka Bord</button>
+                        <button  class="book-table-button" (click)="bookTable(table.tableID)" >Boka Bord</button>
                     </summary>
                     <p class="content">Placering: {{ table.location }}</p>
                     <p class="content">Max antal gäster: {{ table.capacity }}</p>

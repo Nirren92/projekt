@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Food } from '../model/food';
@@ -15,4 +15,27 @@ export class FoodService {
   getFood():Observable<Food[]>{
     return this.http.get<Food[]>(this.url);
   } 
+
+  //Kontroll av data här också?
+  addFood(foodData: any, containsList:string[]): Observable<any> {
+    const body = {
+      ...foodData,
+      contains: containsList
+    };
+    return this.http.post(this.url, body, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+
+  deleteFood(foodIDin: number): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = { foodID: foodIDin };
+    return this.http.delete(this.url,{ headers, body });
+  }
+
+
+
 }

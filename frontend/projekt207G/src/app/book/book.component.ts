@@ -33,7 +33,6 @@ getFreeTable() {
   if (this.bookForm.valid) {
     this.bookService.getFreeTable(this.bookForm.value).subscribe({
       next: (response) => {
-        console.log('Bord tillagt', response);
         this.tableList = response;
       },
       error: (error) => {

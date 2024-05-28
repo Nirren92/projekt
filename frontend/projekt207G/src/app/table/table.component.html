@@ -22,10 +22,13 @@
       
 
                 <details *ngFor="let table of tableList">
-                    <summary class="indicator">Bordsnamn: {{ table.tableID }}</summary>
+                    <summary class="indicator">Bordsnamn: {{ table.tableID }}
+                    <br>
+                    <button class="delete-table-button " (click)="deleteTable(table.tableID)" >Radera Bord</button>
+                    </summary>
                     <p class="content">Placering: {{ table.location }}</p>
                     <p class="content">Antal gäster: {{ table.capacity }}</p>
-                    <button (click)="deleteTable(table.tableID)" >Radera Bord</button>
+                   
                 </details>
     </div>
     

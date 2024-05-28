@@ -1,11 +1,57 @@
 <div class="container">
 <h1>Meny</h1>    
+
+<form [formGroup]="containForm" (ngSubmit)="addContain()">
+    <div>
+        <label for="contains">contains:</label>
+        <input type="text" id="contains" formControlName="contains">
+    </div>
+    <button type="submit">addera ingredients</button>
+    <button type="reset" (click)="resetContain()" >Töm alla ingredients</button>
+    <ul class="ingredients">
+        <li *ngFor="let item of containsList">{{ item }}</li>
+    </ul>
+  </form>
+
+<form [formGroup]="foodForm" (ngSubmit)="addFood()">
+    <div>
+      <label for="foodID">Meny Nummer:</label>
+      <input type="text" id="foodID" formControlName="foodID">
+    </div>
+    <div>
+        <label for="group">group:</label>
+        <input type="text" id="group" formControlName="group">
+      </div>
+    <div>
+      <label for="name">Titel:</label>
+      <input type="text" id="name" formControlName="name">
+    </div>
+    <div>
+        <label for="description">description:</label>
+        <input type="text" id="description" formControlName="description">
+      </div>
+      <div>
+        <label for="price">price:</label>
+        <input type="text" id="price" formControlName="price">
+      </div>
+    <button type="submit">lägg till maträtt</button>
+  </form>
+  
+
+
             <details *ngFor="let food of foodList">
-                <summary class="indicator">{{ food.name }}</summary>
+                <summary class="indicator">{{ food.name }}
+                <br>
+                <button  class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
+            </summary>
                 <p class="content">{{ food.description }}</p>
-                <ul class="ingredients">
-                    <li *ngFor="let item of food.contains">{{ item }}</li>
-                </ul>
+                <details>
+                <summary class="indicator">Innehåll</summary>
+                    <ul class="ingredients">
+                        <li *ngFor="let item of food.contains">{{ item }} 
+                        </li>
+                    </ul>
+                </details>
                 <p class="price">- {{ food.price }} Kr</p>
                 
             </details>
