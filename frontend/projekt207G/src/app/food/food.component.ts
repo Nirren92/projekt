@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { FoodService } from '../service/food.service';
 import { Food } from '../model/food';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FilterGroupPipe } from '../filter-group.pipe';
+
 
 @Component({
   selector: 'app-food',
-  standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './food.component.html',
-  styleUrl: './food.component.scss'
+  styleUrls: ['./food.component.scss'],
 })
+
 export class FoodComponent {
   foodList: Food[] = [];
   foodForm: FormGroup;
@@ -20,7 +21,7 @@ export class FoodComponent {
   constructor(private foodService: FoodService,private fb: FormBuilder,private fb2: FormBuilder) {
     this.foodForm = this.fb.group({
       foodID: ['', Validators.required],
-      group: ['', Validators.required],
+      group: ['', [Validators.required, Validators.pattern(/^(huvudrätt|förrätt|efterrätt)$/)]],
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required]
@@ -85,4 +86,18 @@ export class FoodComponent {
 
 
 
+}
+
+@NgModule({
+  declarations: [
+    FoodComponent, // Lägg till din komponent här
+    FilterGroupPipe // Lägg till din pipe här
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ]
+})
+export class FoodModule {
+  // Eventuella andra konfigurationer för modulen
 }

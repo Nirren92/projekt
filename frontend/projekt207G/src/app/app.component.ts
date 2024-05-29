@@ -9,6 +9,8 @@ import { MainmenuComponent } from "./mainmenu/mainmenu.component";
     styleUrl: './app.component.scss',
     imports: [RouterOutlet,RouterLink,MainmenuComponent]
 })
+
+
 export class AppComponent {
   title = 'projekt207G';
 }

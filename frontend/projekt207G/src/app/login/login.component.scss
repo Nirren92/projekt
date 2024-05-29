@@ -106,13 +106,13 @@ details {
   }
   
   .food-item {
-    background-color: #fff; /* Adds contrast */
+    background-color: #fff; 
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 8px; /* Consistency in design */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    border-radius: 8px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
   }
-  /* Clearfix for floated elements */
+
   .food-item:after {
     content: "";
     display: block;
@@ -139,12 +139,14 @@ details {
     }
   
     input {
-      width: calc(100% - 10px);
+      width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
   }
+  
+
   
   button[type="submit"] {
     display: block;

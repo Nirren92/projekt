@@ -1,13 +1,13 @@
 <div class="container">
-<h1>Meny</h1>    
+<h1>Addera maträtter</h1>    
 
 <form [formGroup]="containForm" (ngSubmit)="addContain()">
     <div>
-        <label for="contains">contains:</label>
+        <label for="contains">Lägg till innehåll i maträtt:</label>
         <input type="text" id="contains" formControlName="contains">
     </div>
-    <button type="submit">addera ingredients</button>
-    <button type="reset" (click)="resetContain()" >Töm alla ingredients</button>
+    <button type="submit">addera ingrediens</button>
+    <button type="reset" (click)="resetContain()" >Ta bort alla</button>
     <ul class="ingredients">
         <li *ngFor="let item of containsList">{{ item }}</li>
     </ul>
@@ -16,11 +16,17 @@
 <form [formGroup]="foodForm" (ngSubmit)="addFood()">
     <div>
       <label for="foodID">Meny Nummer:</label>
-      <input type="text" id="foodID" formControlName="foodID">
+      <input type="number" id="foodID" formControlName="foodID">
     </div>
     <div>
-        <label for="group">group:</label>
-        <input type="text" id="group" formControlName="group">
+      <label for="group">Meny kateogri:</label>
+      <select id="group" formControlName="group">
+        <option value="">kategori</option>
+        <option value="förrätt">förrätt</option>
+        <option value="huvudrätt">huvudrätt</option>
+        <option value="efterrätt">efterrätt</option>
+      </select>
+
       </div>
     <div>
       <label for="name">Titel:</label>
@@ -32,14 +38,15 @@
       </div>
       <div>
         <label for="price">price:</label>
-        <input type="text" id="price" formControlName="price">
+        <input type="number" id="price" formControlName="price">
       </div>
     <button type="submit">lägg till maträtt</button>
   </form>
   
-
-
-            <details *ngFor="let food of foodList">
+</div>
+<div class="container">
+  <h2>Förrätter</h2>
+            <details *ngFor="let food of foodList | filterGroup: 'förrätt'">
                 <summary class="indicator">{{ food.name }}
                 <br>
                 <button  class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
@@ -55,4 +62,45 @@
                 <p class="price">- {{ food.price }} Kr</p>
                 
             </details>
+
+</div>
+<div class="container" >
+  <h2>Huvudrätter</h2>
+            <details *ngFor="let food of foodList | filterGroup: 'huvudrätt'">
+                <summary class="indicator">{{ food.name }}
+                <br>
+                <button  class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
+            </summary>
+                <p class="content">{{ food.description }}</p>
+                <details>
+                <summary class="indicator">Innehåll</summary>
+                    <ul class="ingredients">
+                        <li *ngFor="let item of food.contains">{{ item }} 
+                        </li>
+                    </ul>
+                </details>
+                <p class="price">- {{ food.price }} Kr</p>
+                
+            </details>
+
+</div>
+<div class="container" >
+  <h2>Efterrätter</h2>
+            <details *ngFor="let food of foodList | filterGroup: 'efterrätt'">
+                <summary class="indicator">{{ food.name }}
+                <br>
+                <button  class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
+            </summary>
+                <p class="content">{{ food.description }}</p>
+                <details>
+                <summary class="indicator">Innehåll</summary>
+                    <ul class="ingredients">
+                        <li *ngFor="let item of food.contains">{{ item }} 
+                        </li>
+                    </ul>
+                </details>
+                <p class="price">- {{ food.price }} Kr</p>
+                
+            </details>
+
 </div>
