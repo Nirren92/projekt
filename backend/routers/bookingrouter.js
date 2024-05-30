@@ -65,7 +65,7 @@ router.delete("/booking", async(req, res) => {
             return res.status(400).json({error:"felaktig input"});
         }
         
-        res.status(201).send(await booking.removeBooking({tableID, username,bookingDate}));
+        res.status(200).send(await booking.removeBooking({tableID, username,bookingDate}));
     }
     catch(error)
     {
