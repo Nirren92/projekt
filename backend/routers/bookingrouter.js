@@ -73,5 +73,31 @@ router.delete("/booking", async(req, res) => {
     }
 });
 
+//uppdatera existerande
+router.put("/booking", async(req, res) => {
+    try 
+    {
+        const { tableID, bookingDate, numberGuests,bookingId } = req.body;
+
+        if (!tableID || !bookingDate || !numberGuests) {
+            return res.status(400).json({ error: "felaktig input" });
+        }
+
+        const updatedBooking = await booking.updateBooking({ bookingId,tableID, bookingDate, numberGuests });
+
+        if (!updatedBooking) {
+            return res.status(404).json({ error: "Bokning existerar inte eller så är bordet upptaget" });
+        }
+        res.status(200).json(updatedBooking);
+    } 
+
+    catch (error) 
+    {
+        res.status(500).json({ error: "Serverfel: " + error.message });
+    }
+
+});
+
+
 
 module.exports = router;

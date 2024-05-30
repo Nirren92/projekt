@@ -84,21 +84,26 @@ bookingSchema.statics.addBooking = async function ({tableID, username,bookingDat
 };
 
 // uppdatera Booking
-bookingSchema.statics.updateBooking = async function ({tableID,capacity,location}) {
+bookingSchema.statics.updateBooking = async function ({bookingId,bookingDate,tableID,numberGuests}) {
     try
     {
-        const updatedTable = await this.findOneAndUpdate(
-            {tableID:tableID},
-            {capacity,location}
-        );
-        return updatedTable;
-    }
-    catch(error)
-    {
-        throw(error);
+        const existingBooking = await this.findById(bookingId);
+        if (!existingBooking) {
+            throw new Error("Bokning finns ej");
+        }
+
+        const isAvailable = await this.checkAvailabilityTables(bookingDate, tableID);
+        if (!isAvailable) {
+            throw new Error("Bordet är upptaget");
+        }
+
+        const updatedBooking = await this.findByIdAndUpdate(bookingId, {bookingDate,numberGuests},);
+        return updatedBooking;
+    
+    } catch (error) {
+        throw (error);
     }
 };
-
 
 // Ta bort Booking
 bookingSchema.statics.removeBooking = async function ({tableID, username,bookingDate}) {
