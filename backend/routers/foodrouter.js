@@ -30,61 +30,7 @@ router.get("/food", async(req, res) => {
     }
 });
 
-//addera en maträtt. 
-router.post("/food", async(req, res) => {
-    try
-    {
-        const {foodID,group,name,description,contains,price} = req.body;
-        if(!foodID || !group || !name || !description ||  !price)
-        {
-          
-            return res.status(400).json({error:"felaktig input"});
-        }
-        
-        res.status(201).send(await Food.addFood({foodID,group,name,description,contains,price}));
-    }
-    catch(error)
-    {
-        res.status(500).json({error:"Server fel"+error});
-    }
-});
 
-// radera en maträtt. 
-router.delete("/food", async(req, res) => {
-    try
-    {
-        const {foodID} = req.body;
-        if(!foodID)
-        {
-            return res.status(400).json({error:"felaktig input"});
-        }
-        
-        res.status(201).send(await Food.removeFood({foodID}));
-    }
-    catch(error)
-    {
-        res.status(500).json({error:"Server fel"+error});
-    }
-});
-
-
-//uppdatera en maträtt. 
-router.put("/food", async(req, res) => {
-    try
-    {
-        const {foodID,group,name,description,contains,price} = req.body;
-        if(!foodID || !group || !name || !description || !contains || !price)
-        {
-            return res.status(400).json({error:"felaktig input"});
-        }
-        
-        res.status(201).send(await Food.updateFood({foodID,group,name,description,contains,price}));
-    }
-    catch(error)
-    {
-        res.status(500).json({error:"Server fel"+error});
-    }
-});
 
 
 module.exports = router;

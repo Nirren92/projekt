@@ -4,6 +4,9 @@ header
     background-color: rgb(197, 233, 233);
     width: 100%;
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
     nav
     {
         height: 100px;

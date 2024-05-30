@@ -9,7 +9,8 @@ import { Food } from '../model/food';
 })
 export class FoodService {
  url: string = 'http://localhost:3000/api/food';
-
+ urlprotected: string = 'http://localhost:3000/apiprotected/food';
+ 
 
   constructor(private http: HttpClient) {}
 
@@ -23,20 +24,32 @@ export class FoodService {
       ...foodData,
       contains: containsList
     };
-    return this.http.post(this.url, body, {
+    return this.http.post(this.urlprotected, body, {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${this.getToken()}`
       })
     });
   }
 
 
   deleteFood(foodIDin: number): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = { foodID: foodIDin };
-    return this.http.delete(this.url,{ headers, body });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.getToken()}`
+    });
+  
+    const options = {
+      headers: headers,
+      body: { foodID: foodIDin }
+    };
+  
+    return this.http.delete(this.urlprotected, options);
   }
 
-
+  
+  private getToken(): string | null {
+    return localStorage.getItem('jwt');
+  }
 
 }

@@ -2,7 +2,40 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: rgb(94, 148, 148);
+ 
+
+}
+
+body {
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+}
+
+
+main
+{
+    margin-top: 150px;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        background-image: url("assets/backgroundS.jpg");
+
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        background-image: url("assets/backgroundsmall.jpg");
+    }
+}
+
+@media (min-width: 769px) {
+    body {
+        background-image: url("assets/backgroundL.jpg");
+    }
 }
 
 html, body { height: 100%; }
