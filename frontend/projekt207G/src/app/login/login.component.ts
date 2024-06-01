@@ -39,8 +39,9 @@ export class LoginComponent {
            
           localStorage.setItem("jwt",response.token)
           localStorage.setItem("username",this.loginForm.value.username)
+          
           this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/home']); // Ladda om sidan
+            this.router.navigate(['/home']); 
           });
          
         },
