@@ -52,14 +52,9 @@ router.post("/table",validatetableData(), async(req, res) => {
 });
 
 //radera ett bord. 
-router.delete("/table",validatetableData(), async(req, res) => {
+router.delete("/table", async(req, res) => {
     try
     {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
         const {tableID} = req.body;
         if(!tableID)
         {
@@ -83,7 +78,7 @@ router.put("/table",validatetableData(), async(req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        
+
         const {tableID, capacity,location} = req.body;
         if(!tableID || !capacity || !location)
         {

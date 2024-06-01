@@ -41,7 +41,7 @@ export class FoodService {
   
     const options = {
       headers: headers,
-      body: { foodID: foodIDin }
+      body: { foodID: foodIDin.toString() }
     };
   
     return this.http.delete(this.urlprotected, options);
