@@ -7,7 +7,7 @@ import { Table } from '../model/table';
   providedIn: 'root'
 })
 export class TableService {
- url: string = 'http://localhost:3000/apiprotected/table';
+ url: string = 'https://projekt-6hzw.onrender.com/apiprotected/table';
 
 
   constructor(private http: HttpClient) {}

@@ -8,8 +8,8 @@ import { Food } from '../model/food';
   providedIn: 'root'
 })
 export class FoodService {
- url: string = 'http://localhost:3000/api/food';
- urlprotected: string = 'http://localhost:3000/apiprotected/food';
+ url: string = 'https://projekt-6hzw.onrender.com/api/food';
+ urlprotected: string = 'https://projekt-6hzw.onrender.com/apiprotected/food';
  
 
   constructor(private http: HttpClient) {}

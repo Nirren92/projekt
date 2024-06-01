@@ -7,7 +7,7 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class UserService {
- url: string = 'http://localhost:3000/api/login';
+ url: string = 'https://projekt-6hzw.onrender.com/api/login';
 
 
   constructor(private http: HttpClient) {}

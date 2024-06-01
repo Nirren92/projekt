@@ -8,8 +8,8 @@ import { Table } from '../model/table';
   providedIn: 'root'
 })
 export class BookService {
-  url: string = 'http://localhost:3000/api/booking';
-  url2: string = 'http://localhost:3000/api/freetables';
+  url: string = 'https://projekt-6hzw.onrender.com/api/booking';
+  url2: string = 'https://projekt-6hzw.onrender.com/api/freetables';
 constructor(private http: HttpClient) { }
 
 
