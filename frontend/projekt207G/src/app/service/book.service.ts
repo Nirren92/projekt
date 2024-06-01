@@ -41,7 +41,7 @@ bookTable(tableID:string,tableData:any):Observable<any>
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   const body = { bookingDate: formateraddatum ,
     numberGuests:tableData.numberGuests,
-    username:"Niklas",
+    username:localStorage.getItem("username"),
     tableID:tableID
 
    };
@@ -55,7 +55,7 @@ bookTable(tableID:string,tableData:any):Observable<any>
 getBooking(username: string): Observable<any> {
   const urlWithParams = `${this.url}?username=${username}`;
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+  console.log(urlWithParams, { headers })
   return this.http.get<Table[]>(urlWithParams, { headers });
 }
 

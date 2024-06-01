@@ -21,12 +21,13 @@ export class BookComponent {
   bookForm: FormGroup;
 
   bookedList:Table[] =[];
-
+  bookedList2:Book[] =[];
   ngOnInit(): void {
 
-      this.bookService.getBooking(this.bookForm.value).subscribe({
+      this.bookService.getBooking(localStorage.getItem("username")||"").subscribe({
         next: (response) => {
           this.bookedList = response;
+          this.bookedList2 = response;
         },
         error: (error) => {
           console.error('Nåt gick fel', error);
