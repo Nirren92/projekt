@@ -53,12 +53,12 @@ bookTable(tableID:string,tableData:any):Observable<any>
 
 
 getBooking(username: string): Observable<any> {
+  const urlWithParams = `${this.url}?username=${username}`;
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  const temp = localStorage.getItem("username") || "";
-  const params = new HttpParams().set('username', temp);
 
-  return this.http.get<Table[]>(this.url, { headers, params });
-} 
+  return this.http.get<Table[]>(urlWithParams, { headers });
+}
+
 
 
 }

@@ -92,7 +92,7 @@ router.get("/booking", async(req, res) => {
     {
         
         
-        const { username} = req.body;
+        const { username} =  req.query;
         if( !username)
         {
             return res.status(400).json({error:"felaktig input"});

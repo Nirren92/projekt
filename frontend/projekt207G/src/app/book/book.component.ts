@@ -24,7 +24,7 @@ export class BookComponent {
 
   ngOnInit(): void {
 
-      this.bookService.getFreeTable(this.bookForm.value).subscribe({
+      this.bookService.getBooking(this.bookForm.value).subscribe({
         next: (response) => {
           this.bookedList = response;
         },
