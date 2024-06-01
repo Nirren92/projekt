@@ -27,7 +27,9 @@ export class FoodService {
     return this.http.post(this.urlprotected, body, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        authorization: `Bearer ${this.getToken()}`
+        authorization: `Bearer ${this.getToken()},
+        'usernamne': username
+        `
       })
     });
   }
@@ -51,5 +53,9 @@ export class FoodService {
   private getToken(): string | null {
     return localStorage.getItem('jwt');
   }
+
+  private getUsername(): string | null {
+    return localStorage.getItem('username');
+}
 
 }
