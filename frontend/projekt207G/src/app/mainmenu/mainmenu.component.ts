@@ -16,14 +16,13 @@ export class MainmenuComponent  {
   constructor() { }
 
   ngOnInit(): void {
-
     const temp = localStorage.getItem("jwt");
-    console.log("jwt",temp);
-    if(!temp)
-      {
-        this.jwtcheck=true;
-      }
-
+    console.log("jwt", temp);
+    if (!temp) {
+      this.jwtcheck = true;
+    }
+    console.log("jwtcheck", this.jwtcheck); // Lägg till denna rad för att kontrollera värdet av jwtcheck
   }
+  
   
 }
