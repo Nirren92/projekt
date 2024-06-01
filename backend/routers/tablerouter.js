@@ -8,6 +8,7 @@ const uri = process.env.URLDB;
 
 const mongoose = require("mongoose");
 const { ObjectId } = require("mongodb");
+const { body, validationResult } = require('express-validator');
 
 
 mongoose
@@ -17,10 +18,26 @@ mongoose
 
     const Table = require("../models/table.js");    
 
+//kontroller av indata till API
+const validatetableData = () => {
+    console.log("kontrollerar data");
+    return [
+        body('location').custom(value => ["inne", "ute"].includes(value)).withMessage('location måste vara måstem antagligen inne eller ute'),
+        body('tableID').custom(value => value != "").withMessage('tableID Får inte vara tomt'),
+        body('capacity').isNumeric().custom(value => value > 0).withMessage('capacity måste vara större än 0'),
+    ];
+};
+
+
 //addera ett bord. lägg till kontroll av location mer
-router.post("/table", async(req, res) => {
+router.post("/table",validatetableData(), async(req, res) => {
     try
     {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         const {tableID, capacity,location} = req.body;
         if(!tableID || !capacity || !location)
         {
@@ -35,10 +52,14 @@ router.post("/table", async(req, res) => {
 });
 
 //radera ett bord. 
-router.delete("/table", async(req, res) => {
+router.delete("/table",validatetableData(), async(req, res) => {
     try
     {
-       
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         const {tableID} = req.body;
         if(!tableID)
         {
@@ -55,9 +76,14 @@ router.delete("/table", async(req, res) => {
 
 
 //uppdatera ett bord. lägg till kontroll av location mer
-router.put("/table", async(req, res) => {
+router.put("/table",validatetableData(), async(req, res) => {
     try
     {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        
         const {tableID, capacity,location} = req.body;
         if(!tableID || !capacity || !location)
         {
