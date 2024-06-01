@@ -69,6 +69,7 @@ bookTable(tableID:string) {
       next: (response) => {
         console.log('bokning tillagt', response);
         this.getFreeTable()
+        this.ngOnInit()
       },
       error: (error) => {
         console.error('Nåt gick fel', error);
