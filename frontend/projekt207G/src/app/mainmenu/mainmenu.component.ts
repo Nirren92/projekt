@@ -11,7 +11,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './mainmenu.component.scss'
 })
 export class MainmenuComponent  {
+  jwtcheck: boolean = false;
  
-  
+  constructor() { }
+
+  ngOnInit(): void {
+
+    this.jwtcheck = !!localStorage.getItem('jwt');
+  }
   
 }

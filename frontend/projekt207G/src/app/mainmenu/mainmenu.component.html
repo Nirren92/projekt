@@ -4,8 +4,9 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/home" >Home</button>
         <button mat-menu-item routerLink="/table">Table</button>
-        <button mat-menu-item routerLink="/food">Food</button>
+        
         <button mat-menu-item routerLink="/book">Bookning</button>
+        <button mat-menu-item *ngIf="jwtcheck" routerLink="/table">Table</button>
       </mat-menu>
   </nav>
 </header>
