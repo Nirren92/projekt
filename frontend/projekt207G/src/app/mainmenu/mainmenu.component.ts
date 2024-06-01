@@ -17,7 +17,13 @@ export class MainmenuComponent  {
 
   ngOnInit(): void {
 
-    this.jwtcheck = !!localStorage.getItem('jwt');
+    const temp = localStorage.getItem('jwt');
+    console.log("jwt",temp);
+    if(!temp)
+      {
+        this.jwtcheck=true;
+      }
+
   }
   
 }
