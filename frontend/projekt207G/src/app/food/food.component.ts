@@ -105,8 +105,8 @@ export class FoodComponent {
 
 @NgModule({
   declarations: [
-    FoodComponent, // Lägg till din komponent här
-    FilterGroupPipe // Lägg till din pipe här
+    FoodComponent, 
+    FilterGroupPipe 
   ],
   imports: [
     CommonModule,
@@ -114,5 +114,5 @@ export class FoodComponent {
   ]
 })
 export class FoodModule {
-  // Eventuella andra konfigurationer för modulen
+ 
 }
