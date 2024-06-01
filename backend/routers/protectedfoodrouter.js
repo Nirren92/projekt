@@ -46,7 +46,6 @@ router.get("/food", async(req, res) => {
 router.post("/food", validateFoodData(),async(req, res) => {
     try
     {
-        console.log("data har kommit",req);
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -71,11 +70,16 @@ router.post("/food", validateFoodData(),async(req, res) => {
 router.delete("/food",validateFoodData(), async(req, res) => {
     try
     {
+        const {foodID} = req.body;
+        console.log("data som ska tas bort",foodID)
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const {foodID} = req.body;
+
+       
+        
         if(!foodID)
         {
             return res.status(400).json({error:"felaktig input"});
