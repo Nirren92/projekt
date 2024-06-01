@@ -16,7 +16,7 @@ export class HomeComponent {
 
     
     
-    this.username = localStorage.getItem("username") || "du är inte inloggad, men ";
+    this.username = localStorage.getItem("username") || "du är inte inloggad";
         
 
         
