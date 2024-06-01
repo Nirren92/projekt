@@ -3,12 +3,12 @@
       <button class="menubutton" mat-button [matMenuTriggerFor]="menu">Menu</button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/home" >Home</button>
-        <button mat-menu-item routerLink="/table">Table</button>
+        <button mat-menu-item routerLink="/food">Mat meny</button>
         
         <button mat-menu-item routerLink="/book">Bookning</button>
-        <ng-container *ngIf="jwtcheck">
-          <button mat-menu-item routerLink="/table">Table</button>
-        </ng-container>
+        <button mat-menu-item routerLink="/login" *ngIf="admininne">Logga in</button>
+
+        <button mat-menu-item *ngIf="admin" routerLink="/table">Table</button>
       </mat-menu>
   </nav>
 </header>

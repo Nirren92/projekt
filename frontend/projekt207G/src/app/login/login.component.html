@@ -13,5 +13,21 @@
         <button type="submit">Logga in</button>
       </form>
 
+</div>
 
-      </div>
+<div class="container">
+    <h2>Ny Användare</h2>    
+    
+    <form [formGroup]="addUserForm" (ngSubmit)="addUser()">
+        <div>
+            <label for="Addusername">Användarnamn:</label>
+            <input type="text" id="Addusername" formControlName="username">
+        </div>
+        <div>
+            <label for="Addpassword">Lösenord:</label>
+            <input type="text" id="Addpassword" formControlName="password">
+        </div>
+        <button type="submit">Logga in</button>
+      </form>
+
+</div>

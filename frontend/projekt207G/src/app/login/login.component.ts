@@ -14,10 +14,15 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  addUserForm:FormGroup
 
-
-  constructor( private router: Router,private userService: UserService,private fb: FormBuilder) {
+  constructor( private router: Router,private userService: UserService,private fb: FormBuilder,private fb2: FormBuilder) {
     this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]      
+    });
+
+    this.addUserForm = this.fb2.group({
       username: ['', Validators.required],
       password: ['', Validators.required]      
     });
@@ -33,7 +38,10 @@ export class LoginComponent {
         next: (response) => {
            
           localStorage.setItem("jwt",response.token)
-          this.router.navigate(['/home']);
+          localStorage.setItem("username",this.loginForm.value.username)
+          this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/home']); // Ladda om sidan
+          });
          
         },
         error: (error) => {
@@ -43,6 +51,22 @@ export class LoginComponent {
     }   
   }
 
+
+  addUser() {
+    console.log("startfunktion");
+    if (this.addUserForm.valid) {
+      this.userService.addUser(this.addUserForm.value).subscribe({
+        next: (response) => {
+          // Återställ formuläret
+          this.addUserForm.reset();
+        },
+        error: (error) => {
+          console.error('nåt gick fel', error);
+        }
+      });
+    }
+  }
+  
 
 
 

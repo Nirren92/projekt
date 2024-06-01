@@ -8,6 +8,7 @@ import { User } from '../model/user';
 })
 export class UserService {
  url: string = 'https://projekt-6hzw.onrender.com/api/login';
+ url2: string = 'https://projekt-6hzw.onrender.com/api/register';
 
 
   constructor(private http: HttpClient) {}
@@ -16,4 +17,9 @@ export class UserService {
   logIn(userData: any): Observable<any> {
     return this.http.post(this.url, userData);
   }
+
+  addUser(userData: any): Observable<any> {
+    return this.http.post(this.url2, userData);
+  }
+
 }
