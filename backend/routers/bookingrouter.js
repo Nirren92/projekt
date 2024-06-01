@@ -86,15 +86,12 @@ router.post("/booking",validatebookingData(), async(req, res) => {
 
 
 
-//addera en booking. 
-router.get("/booking",validatebookingData(), async(req, res) => {
+//hämta en booking. 
+router.get("/booking", async(req, res) => {
     try
     {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
+        
+        
         const { username} = req.body;
         if( !username)
         {

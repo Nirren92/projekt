@@ -32,7 +32,7 @@
     <div class="container">
       <h2>Mina bokning</h2>    
 
-                  <details *ngFor="let table of tableList">
+                  <details *ngFor="let table of bookedList">
                       <summary class="indicator">Bordsnamn: {{ table.tableID }}
                           <br>
                           <button  class="book-table-button" (click)="bookTable(table.tableID)" >Boka Bord</button>
