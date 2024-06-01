@@ -71,10 +71,11 @@ router.delete("/food",validateFoodData(), async(req, res) => {
     try
     {
         const {foodID} = req.body;
-        console.log("data som ska tas bort",foodID)
+        
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            console.log("data som ska tas bort",foodID)
             return res.status(400).json({ errors: errors.array() });
         }
 
