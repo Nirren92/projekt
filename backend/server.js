@@ -37,10 +37,10 @@ function auth_token(req, res, next)
             return res.status(401).json({error:"inte tillgång"});
         }
 
-        const username = decodedToken.username;
+        const usernameres = decodedToken.username;
 
 
-        if (username !== 'admin') {
+        if (usernameres !== 'admin') {
             return res.status(403).json({ error: "Endast admin har tillgång" });
         }
         
