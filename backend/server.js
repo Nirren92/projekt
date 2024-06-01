@@ -31,16 +31,16 @@ function auth_token(req, res, next)
         return res.status(401).json({error:"inte tillgång"});
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, username) =>{
+    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) =>{
         if(err)
         {
             return res.status(401).json({error:"inte tillgång"});
         }
 
-        const usernameres = decodedToken.username;
+        const username = decodedToken.username;
 
 
-        if (usernameres !== 'admin') {
+        if (username !== 'admin') {
             return res.status(403).json({ error: "Endast admin har tillgång" });
         }
         
