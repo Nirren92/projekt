@@ -58,6 +58,19 @@ bookingSchema.statics.checkAvailabilityTables = async function (desiredDate,tabl
     }
 }
 
+getBooking
+
+// lägg till Booking. kontroll att border inte har blivit taget för att undvika dubbelbokning
+bookingSchema.statics.getBooking = async function ({username}) {
+    try
+    {
+        return userBookings = await booking.find({ username });
+    }
+    catch(error)
+    {
+        throw(error);
+    }
+};
 // lägg till Booking. kontroll att border inte har blivit taget för att undvika dubbelbokning
 bookingSchema.statics.addBooking = async function ({tableID, username,bookingDate,numberGuests}) {
     try

@@ -84,6 +84,32 @@ router.post("/booking",validatebookingData(), async(req, res) => {
     }
 });
 
+
+
+//addera en booking. 
+router.get("/booking",validatebookingData(), async(req, res) => {
+    try
+    {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { username} = req.body;
+        if( !username)
+        {
+            return res.status(400).json({error:"felaktig input"});
+        }
+        
+        res.status(201).send(await booking.getBooking({username}));
+    }
+    catch(error)
+    {
+        res.status(500).json({error:"Server fel"+error});
+    }
+});
+
+
 //radera en booking. 
 router.delete("/booking",validatebookingData(), async(req, res) => {
     try
@@ -115,7 +141,7 @@ router.put("/booking",validatebookingData(), async(req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        
+
         const { tableID, bookingDate, numberGuests,bookingId } = req.body;
 
         if (!tableID || !bookingDate || !numberGuests) {

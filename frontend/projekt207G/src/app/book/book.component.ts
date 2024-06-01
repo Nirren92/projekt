@@ -20,6 +20,26 @@ export class BookComponent {
   tableList: Table[] = [];
   bookForm: FormGroup;
 
+  bookedList:Table[] =[];
+
+  ngOnInit(): void {
+
+      this.bookService.getFreeTable(this.bookForm.value).subscribe({
+        next: (response) => {
+          this.bookedList = response;
+        },
+        error: (error) => {
+          console.error('Nåt gick fel', error);
+        }
+      });
+    
+    
+        
+  }
+
+
+
+
   constructor(private bookService: BookService, private fb: FormBuilder) {
     this.bookForm = this.fb.group({
       bookingDate: ['', Validators.required],
