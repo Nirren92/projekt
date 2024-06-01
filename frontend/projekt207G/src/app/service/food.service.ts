@@ -28,7 +28,7 @@ export class FoodService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         authorization: `Bearer ${this.getToken()},
-        'usernamne': username
+        'usernamne': ${this.getUsername()}
         `
       })
     });
