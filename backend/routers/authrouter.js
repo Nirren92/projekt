@@ -66,7 +66,8 @@ router.post("/login", async(req, res) => {
             const pay_load = {username:username};
             const token = jwt.sign(pay_load,process.env.JWT_SECRET,{expiresIn: '1h'});
             return res.status(200).json({message:"Inloggad",
-                                        token:token        
+                                        token:token,
+                                        username: username        
             });
         }   
     }
