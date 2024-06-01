@@ -4,12 +4,14 @@ import { FoodService } from '../service/food.service';
 import { Food } from '../model/food';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilterGroupPipe } from '../filter-group.pipe';
+import { NavigationEnd } from '@angular/router';
 
 
 @Component({
   selector: 'app-food',
   templateUrl: './food.component.html',
   styleUrls: ['./food.component.scss'],
+  
 })
 
 export class FoodComponent {
@@ -17,6 +19,11 @@ export class FoodComponent {
   foodForm: FormGroup;
   containForm: FormGroup;
   containsList: string[] = [];
+  admin: boolean = false;
+  admininne: boolean = false;
+  user: boolean = false;
+  userinne: boolean = false;
+
 
   constructor(private foodService: FoodService,private fb: FormBuilder,private fb2: FormBuilder) {
     this.foodForm = this.fb.group({
@@ -81,6 +88,14 @@ export class FoodComponent {
   ngOnInit() {
     this.foodService.getFood().subscribe((data) => {
     this.foodList = data;
+ 
+    this.admin = localStorage.getItem("username") =="admin";
+    this.admininne = !this.admin;
+  
+    this.user = localStorage.getItem("jwt") ? true : false;
+    this.userinne = !this.admin;
+    
+
   });
 }
 

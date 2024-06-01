@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="admin">
 <h1>Addera maträtter</h1>    
 
 <form [formGroup]="containForm" (ngSubmit)="addContain()">
@@ -49,7 +49,7 @@
             <details *ngFor="let food of foodList | filterGroup: 'förrätt'">
                 <summary class="indicator">{{ food.name }}
                 <br>
-                <button  class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
+                <button *ngIf="admin" class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
             </summary>
                 <p class="content">{{ food.description }}</p>
                 <details>
@@ -69,7 +69,7 @@
             <details *ngFor="let food of foodList | filterGroup: 'huvudrätt'">
                 <summary class="indicator">{{ food.name }}
                 <br>
-                <button  class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
+                <button *ngIf="admin" class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
             </summary>
                 <p class="content">{{ food.description }}</p>
                 <details>
@@ -89,7 +89,7 @@
             <details *ngFor="let food of foodList | filterGroup: 'efterrätt'">
                 <summary class="indicator">{{ food.name }}
                 <br>
-                <button  class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
+                <button *ngIf="admin" class="delete-food-button" (click)="deleteFood(food.foodID)" >Radera maträtt</button>
             </summary>
                 <p class="content">{{ food.description }}</p>
                 <details>

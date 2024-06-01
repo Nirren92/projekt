@@ -8,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  
+  username:string = " "
 
+
+  ngOnInit(): void {
+
+    
+    
+    this.username = localStorage.getItem("username") || "du är inte inloggad, men ";
+        
+
+        
+  }
+
+  
 }

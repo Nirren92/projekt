@@ -14,19 +14,31 @@ import { CommonModule } from '@angular/common';
 export class MainmenuComponent  {
   admin: boolean = false;
   admininne: boolean = false;
+  user: boolean = false;
+  userinne: boolean = false;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+
     this.router.events.subscribe(event => {
-   
-      if (event instanceof NavigationEnd) 
-        this.admin = localStorage.getItem("jwt") ? true : false;
-      this.admininne = !this.admin;
+      if (event instanceof NavigationEnd) {
+            console.log("kör")
+        this.admin = localStorage.getItem("username") == "admin";
+        this.admininne = !this.admin;
+
+        this.user = localStorage.getItem("jwt") ? true : false;
+        this.userinne = !this.admin;
       }
-    );
+    });
   }
-  
-  
-  
+
+  loggaut(): void {
+    localStorage.setItem("username","");
+    localStorage.setItem("jwt","");
+ 
+    this.router.navigate(['/home']); 
+    
+    this.ngOnInit();
+  }
   
 }

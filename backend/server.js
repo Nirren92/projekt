@@ -39,7 +39,7 @@ function auth_token(req, res, next)
 
         const username = decodedToken.username;
 
-
+        // detta är jag inte nöjd med. skulle vilja styra admin rättiheter från databas och inte i namnet. men hann inte göra om detta så. 
         if (username !== 'admin') {
             return res.status(403).json({ error: "Endast admin har tillgång" });
         }

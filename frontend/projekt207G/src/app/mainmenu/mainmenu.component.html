@@ -5,8 +5,11 @@
         <button mat-menu-item routerLink="/home" >Home</button>
         <button mat-menu-item routerLink="/food">Mat meny</button>
         
-        <button mat-menu-item routerLink="/book">Bookning</button>
-        <button mat-menu-item routerLink="/login" *ngIf="admininne">Logga in</button>
+        <button mat-menu-item routerLink="/book" *ngIf="user ||admin">Bookning</button>
+
+        <button mat-menu-item routerLink="/login" *ngIf="!user && !admin">Logga in</button>
+
+        <button mat-menu-item (click)="loggaut()" *ngIf="user ||admin">Logga ut</button>
 
         <button mat-menu-item *ngIf="admin" routerLink="/table">Table</button>
       </mat-menu>
