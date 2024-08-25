@@ -36,11 +36,9 @@ deleteTable(tableID:string)
 {
   this.tableService.deleteTable(tableID).subscribe({
     next: (response) => {
-      console.log('Bord bortaget', response);
       this.ngOnInit();
     },
     error: (error) => {
-      console.error('Nåt gick fel', error);
     }
   });
 }
@@ -49,11 +47,10 @@ addTable() {
   if (this.tableForm.valid) {
     this.tableService.addTable(this.tableForm.value).subscribe({
       next: (response) => {
-        console.log('Bord tillagt', response);
         this.ngOnInit();
       },
       error: (error) => {
-        console.error('Nåt gick fel', error);
+        
       }
     });
   }

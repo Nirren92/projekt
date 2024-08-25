@@ -46,7 +46,6 @@ export class LoginComponent {
          
         },
         error: (error) => {
-          console.error('nåt gick fel', error)
         }
       });
     }   
@@ -54,7 +53,6 @@ export class LoginComponent {
 
 
   addUser() {
-    console.log("startfunktion");
     if (this.addUserForm.valid) {
       this.userService.addUser(this.addUserForm.value).subscribe({
         next: (response) => {
@@ -62,7 +60,6 @@ export class LoginComponent {
           this.addUserForm.reset();
         },
         error: (error) => {
-          console.error('nåt gick fel', error);
         }
       });
     }

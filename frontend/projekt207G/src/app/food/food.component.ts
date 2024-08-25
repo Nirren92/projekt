@@ -45,13 +45,11 @@ export class FoodComponent {
       if (this.foodForm.valid) {
         this.foodService.addFood(this.foodForm.value, this.containsList).subscribe({
           next: (response) => {
-            console.log('Food tillagt', response);
             this.foodList.push(response);
             this.foodForm.reset();
             this.resetContain(); 
           },
           error: (error) => {
-            console.error('nåt gick fel', error)
           }
         });
       } 
@@ -61,11 +59,9 @@ export class FoodComponent {
     {
       this.foodService.deleteFood(foodID).subscribe({
         next: (response) => {
-          console.log('bortaget', response);
           this.ngOnInit();
         },
         error: (error) => {
-          console.error('Nåt gick fel', error);
         }
       });
     }

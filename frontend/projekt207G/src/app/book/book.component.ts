@@ -30,7 +30,6 @@ export class BookComponent {
           this.bookedList2 = response;
         },
         error: (error) => {
-          console.error('Nåt gick fel', error);
         }
       });
     
@@ -50,36 +49,28 @@ export class BookComponent {
     
      }
 
-getFreeTable() {
-  if (this.bookForm.valid) {
-    this.bookService.getFreeTable(this.bookForm.value).subscribe({
-      next: (response) => {
-        this.tableList = response;
-      },
-      error: (error) => {
-        console.error('Nåt gick fel', error);
-      }
-    });
+  getFreeTable() {
+    if (this.bookForm.valid) {
+      this.bookService.getFreeTable(this.bookForm.value).subscribe({
+        next: (response) => {
+          this.tableList = response;
+        },
+        error: (error) => {
+        }
+      });
+    }
   }
-}
 
-bookTable(tableID:string) {
-  if (this.bookForm.valid) {
-    this.bookService.bookTable(tableID,this.bookForm.value).subscribe({
-      next: (response) => {
-        console.log('bokning tillagt', response);
-        this.getFreeTable()
-        this.ngOnInit()
-      },
-      error: (error) => {
-        console.error('Nåt gick fel', error);
-      }
-    });
+  bookTable(tableID:string) {
+    if (this.bookForm.valid) {
+      this.bookService.bookTable(tableID,this.bookForm.value).subscribe({
+        next: (response) => {
+          this.getFreeTable()
+          this.ngOnInit()
+        },
+        error: (error) => {
+        }
+      });
+    }
   }
-}
-
-
-
-
-
 }
