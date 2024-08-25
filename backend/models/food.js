@@ -1,7 +1,4 @@
 const mongoose = require("mongoose");
-
-
-
 //skapar schemat för maträtter
 const foodSchema = new mongoose.Schema({
     foodID:{
@@ -32,7 +29,6 @@ const foodSchema = new mongoose.Schema({
         type:Number,
         required:true
     }
-
 });
 
 

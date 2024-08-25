@@ -5,7 +5,6 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 
-
 const authRouters = require("./routers/authrouter")
 const tableRouters = require("./routers/tablerouter")
 const bookingRouters = require("./routers/bookingrouter")
@@ -13,14 +12,10 @@ const foodRouters = require("./routers/foodrouter")
 const protectedfoodRouters = require("./routers/protectedfoodrouter")
 
 app.use("/api",cors(), authRouters);
-
-
 app.use("/api",cors(), bookingRouters);
 app.use("/api",cors(), foodRouters);
-
 app.use("/apiprotected",auth_token,cors(), protectedfoodRouters);
 app.use("/apiprotected",auth_token,cors(), tableRouters);
-
 
 //validera token
 function auth_token(req, res, next)
@@ -36,9 +31,7 @@ function auth_token(req, res, next)
         {
             return res.status(401).json({error:"inte tillgång"});
         }
-
         const username = decodedToken.username;
-
         // detta är jag inte nöjd med. skulle vilja styra admin rättiheter från databas och inte i namnet. men hann inte göra om detta så. 
         if (username !== 'admin') {
             return res.status(403).json({ error: "Endast admin har tillgång" });
@@ -48,9 +41,6 @@ function auth_token(req, res, next)
         next();
     });
 }
-
-
-
 
 //Starta server
 app.listen(process.env.PORT, () =>{

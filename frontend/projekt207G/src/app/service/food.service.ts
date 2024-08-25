@@ -24,14 +24,13 @@ export class FoodService {
       ...foodData,
       contains: containsList
     };
-    return this.http.post(this.urlprotected, body, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${this.getToken()},
-        'usernamne': ${this.getUsername()}
-        `
-      })
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.getToken()}`
     });
+
+    return this.http.post(this.urlprotected, body, { headers });
   }
 
 
